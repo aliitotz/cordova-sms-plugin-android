@@ -45,7 +45,12 @@ public class CordovaSMS extends CordovaPlugin {
                             final String packageName = cordova.getActivity().getPackageName();
                             Log.d(LOG_TAG,"State restored 2::packageName::"+packageName+":::Telephony data::"+Telephony.Sms.getDefaultSmsPackage(cordova.getActivity()));
                             if (action.equalsIgnoreCase("sendsms")) {
-                                if(!packageName.equalsIgnoreCase(Telephony.Sms.getDefaultSmsPackage(cordova.getActivity()))){
+                                JSONObject argument = args.getJSONObject(0);
+                                String recipient = argument.getString("recipient");
+                                String message = argument.getString("message");
+                                ComposeSMSActivity.sendSMS(recipient, message,cordova.getActivity().getApplicationContext());
+                                callbackContext.success("Sending initiated");
+                                /*if(!packageName.equalsIgnoreCase(Telephony.Sms.getDefaultSmsPackage(cordova.getActivity()))){
                                     callbackContext.error("Unable to send SMS, make your app as Default SMS app by calling setDefault method");
                                 }
                                 else{
@@ -54,7 +59,7 @@ public class CordovaSMS extends CordovaPlugin {
                                     String message = argument.getString("message");
                                     ComposeSMSActivity.sendSMS(recipient, message,cordova.getActivity().getApplicationContext());
                                     callbackContext.success("Sending initiated");
-                                }
+                                }*/
                             }
                              else if (action.equalsIgnoreCase("checkdefault")) {
                                     JSONObject response = new JSONObject();
