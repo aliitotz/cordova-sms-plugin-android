@@ -40,10 +40,15 @@
             <!-- BroadcastReceiver that listens to incoming SMS messages -->
             <receiver
                 android:name="com.ramkumar.cordovaplugins.sms.receivers.SMSBroadcastReceiver"
-                android:permission="android.permission.BROADCAST_SMS" >
-                <intent-filter>
+                android:permission="android.permission.BROADCAST_SMS" 
+                android:enabled="true"
+                android:exported="true">
+                <!--<intent-filter>
                     <action android:name="android.provider.Telephony.SMS_DELIVER" />
-                </intent-filter>
+                </intent-filter>-->
+                 <intent-filter>
+                    <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+                 </intent-filter>
             </receiver>
 
             <!-- BroadcastReceiver that listens to incoming MMS messages -->
